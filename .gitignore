@@ -1,5 +1,5 @@
 *.css
-*.tgz
+
 npm-debug.log
 sftp-config.json
 *.sublime-project
