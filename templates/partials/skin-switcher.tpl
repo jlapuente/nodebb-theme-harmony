@@ -11,6 +11,7 @@
 	</a>
 
 	<ul class="dropdown-menu p-1 text-sm overflow-auto p-1" role="menu">
+		<!-- IMPORT partials/color-modes.tpl -->
 		<div class="d-flex">
 			<div>
 				<li class="dropdown-header">{{tx("themes/harmony:light")}}</li>

@@ -8,6 +8,7 @@
 				</span>
 			</a>
 			<ul class="navigation-dropdown dropdown-menu" role="menu">
+				<!-- IMPORT partials/color-modes.tpl -->
 				{{{ each navigation }}}
 				{{{ if displayMenuItem(@root, @index) }}}
 				<li class="nav-item {./class}{{{ if ./dropdown }}} dropend{{{ end }}}" title="{tx(./title)}">

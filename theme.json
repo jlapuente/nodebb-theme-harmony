@@ -1,7 +1,7 @@
 {
-    "id": "nodebb-theme-harmony",
-    "name": "Harmony",
-    "description": "The default theme for NodeBB. Uses a standard approach to forum design.",
-    "url": "https://github.com/nodebb/nodebb-theme-harmony",
+    "id": "nodebb-theme-wno-alyx",
+    "name": "WNO Alyx",
+    "description": "An independent HUD-inspired theme for WNO, based on Harmony.",
+    "url": "https://github.com/jlapuente/nodebb-theme-harmony",
     "screenshot": "screenshot.png"
 }

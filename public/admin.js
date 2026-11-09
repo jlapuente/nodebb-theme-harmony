@@ -1,13 +1,13 @@
 'use strict';
 
-define('admin/plugins/harmony', ['settings'], function (Settings) {
+define('admin/plugins/wno-alyx', ['settings'], function (Settings) {
 	const ACP = {};
 
 	ACP.init = function () {
-		Settings.load('harmony', $('.harmony-settings'));
+		Settings.load('wno-alyx', $('.wno-alyx-settings'));
 
 		$('#save').on('click', function () {
-			Settings.save('harmony', $('.harmony-settings'));
+			Settings.save('wno-alyx', $('.wno-alyx-settings'));
 		});
 	};
 

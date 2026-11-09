@@ -1,4 +1,8 @@
 // Keep alternate Bootswatch skins and NodeBB's colour-mode preference intact.
+body:not(.skin-noskin) [component="wno-alyx/color-modes"] {
+	display: none;
+}
+
 body.skin-noskin {
 	--alyx-surface: #faf9f3;
 	--alyx-surface-raised: #e8ebe3;
@@ -39,6 +43,8 @@ body.skin-noskin {
 
 	[data-bs-theme="dark"] & {
 		color-scheme: dark;
+		--nav-color: var(--alyx-ink);
+		--nav-bg: var(--alyx-surface);
 		--alyx-surface: #1b2425;
 		--alyx-surface-raised: #253132;
 		--alyx-ink: #e5e9df;
@@ -132,6 +138,12 @@ body.skin-noskin {
 
 	.bottombar-nav {
 		border-top: 1px solid var(--alyx-line);
+	}
+
+	[component="wno-alyx/color-modes"] [aria-pressed="true"] {
+		color: var(--alyx-accent);
+		background-color: var(--alyx-surface-raised);
+		box-shadow: inset 0 -2px var(--alyx-accent);
 	}
 
 	.categories-list > [component="categories/category"],

@@ -1,5 +1,5 @@
 {
-	"id": "nodebb-theme-harmony",
+	"id": "nodebb-theme-wno-alyx",
 	"hooks": [
 		{ "hook": "static:app.load", "method": "init" },
 		{ "hook": "filter:admin.header.build", "method": "addAdminNavigation" },
@@ -11,11 +11,11 @@
 		{ "hook": "filter:middleware.renderHeader", "method": "filterMiddlewareRenderHeader" }
 	],
 	"scripts": [
-		"public/harmony.js"
+		"public/wno-alyx.js"
 	],
 	"modules": {
-		"../admin/plugins/harmony.js": "public/admin.js",
-		"../client/account/theme.js": "public/settings.js"
+		"../admin/plugins/wno-alyx.js": "public/admin.js",
+		"../client/account/wno-alyx.js": "public/settings.js"
 	},
 	"staticDirs": {
 		"inter": "node_modules/@fontsource/inter/files",

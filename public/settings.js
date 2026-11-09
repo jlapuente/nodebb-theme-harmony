@@ -1,6 +1,6 @@
 'use strict';
 
-define('forum/account/theme', ['forum/account/header', 'api', 'settings', 'alerts'], function (header, api, settings, alerts) {
+define('forum/account/wno-alyx', ['forum/account/header', 'api', 'settings', 'alerts'], function (header, api, settings, alerts) {
 	const Theme = {};
 
 	Theme.init = () => {

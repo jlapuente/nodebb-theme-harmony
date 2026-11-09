@@ -3,7 +3,7 @@
 
 	<div class="row m-0">
 		<div id="spy-container" class="col-12 col-md-8 px-0 mb-4" tabindex="0">
-			<form role="form" class="harmony-settings">
+			<form role="form" class="wno-alyx-settings">
 				<div class="form-check form-switch">
 					<input type="checkbox" class="form-check-input" id="enableQuickReply" name="enableQuickReply" />
 					<label for="enableQuickReply" class="form-check-label">{{tx("themes/harmony:settings.enableQuickReply")}}</label>

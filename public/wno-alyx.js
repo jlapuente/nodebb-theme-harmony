@@ -1,6 +1,7 @@
 'use strict';
 
 $(document).ready(function () {
+	setupColorMode();
 	setupSkinSwitcher();
 	setupNProgress();
 	setupMobileMenu();
@@ -11,8 +12,37 @@ $(document).ready(function () {
 	fixPlaceholders();
 	fixSidebarOverflow();
 
+	function setupColorMode() {
+		function applyColorMode() {
+			const isDefaultSkin = document.body.classList.contains('skin-noskin');
+			if (isDefaultSkin) {
+				document.documentElement.setAttribute('data-bs-theme', app.wnoAlyxColorMode);
+			} else {
+				document.documentElement.removeAttribute('data-bs-theme');
+			}
+			$('[component="wno-alyx/color-modes"] [data-color-mode]').each(function () {
+				$(this).attr('aria-pressed', $(this).attr('data-color-mode') === app.wnoAlyxColorMode ? 'true' : 'false');
+			});
+		}
+
+		$('body').on('click', '[component="wno-alyx/color-modes"] [data-color-mode]', function () {
+			const mode = $(this).attr('data-color-mode');
+			if (mode !== 'light' && mode !== 'dark') {
+				throw new Error('Invalid WNO Alyx colour mode');
+			}
+			app.wnoAlyxColorMode = mode;
+			document.cookie = `wno-alyx-color-mode=${mode}; Path=${config.relative_path || '/'}; Max-Age=31536000; SameSite=Lax${window.location.protocol === 'https:' ? '; Secure' : ''}`;
+			applyColorMode();
+		});
+		require(['hooks'], function (hooks) {
+			hooks.on('action:skin.change', applyColorMode);
+			hooks.on('action:ajaxify.end', applyColorMode);
+		});
+		applyColorMode();
+	}
+
 	function setupSkinSwitcher() {
-		$('[component="skinSwitcher"]').on('click', '.dropdown-item', function () {
+		$('[component="skinSwitcher"]').on('click', '.dropdown-item[data-value]', function () {
 			const skin = $(this).attr('data-value');
 			$('[component="skinSwitcher"] .dropdown-item .fa-check').addClass('invisible');
 			$(this).find('.fa-check').removeClass('invisible');
@@ -52,7 +82,7 @@ $(document).ready(function () {
 				if (app.user.uid) {
 					await api.put(`/users/${app.user.uid}/settings`, {
 						settings: {
-							openSidebars: sidebarEl.hasClass('open') ? 'on' : 'off',
+							wnoAlyx_openSidebars: sidebarEl.hasClass('open') ? 'on' : 'off',
 						},
 					});
 				}

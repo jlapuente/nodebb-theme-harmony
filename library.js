@@ -4,7 +4,6 @@ const os = nodebb.require('os');
 const nconf = nodebb.require('nconf');
 
 const meta = nodebb.require('./src/meta');
-const _ = nodebb.require('lodash');
 const user = nodebb.require('./src/user');
 
 const controllers = require('./lib/controllers');
@@ -28,9 +27,9 @@ library.init = async function (params) {
 	const { router, middleware } = params;
 	const routeHelpers = nodebb.require('./src/routes/helpers');
 
-	routeHelpers.setupAdminPageRoute(router, '/admin/plugins/harmony', [], controllers.renderAdminPage);
+	routeHelpers.setupAdminPageRoute(router, '/admin/plugins/wno-alyx', [], controllers.renderAdminPage);
 
-	routeHelpers.setupPageRoute(router, '/user/:userslug/theme', [
+	routeHelpers.setupPageRoute(router, '/user/:userslug/wno-alyx', [
 		middleware.exposeUid,
 		middleware.ensureLoggedIn,
 		middleware.canViewUsers,
@@ -59,19 +58,19 @@ async function buildSkins() {
 
 library.addAdminNavigation = async function (header) {
 	header.plugins.push({
-		route: '/plugins/harmony',
+		route: '/plugins/wno-alyx',
 		icon: 'fa-paint-brush',
-		name: '[[themes/harmony:theme-name]]',
+		name: 'WNO Alyx',
 	});
 	return header;
 };
 
 library.addProfileItem = async (data) => {
 	data.links.push({
-		id: 'theme',
-		route: 'theme',
+		id: 'wno-alyx',
+		route: 'wno-alyx',
 		icon: 'fa-paint-brush',
-		name: '[[themes/harmony:settings.title]]',
+		name: 'WNO Alyx',
 		visibility: {
 			self: true,
 			other: false,
@@ -142,11 +141,18 @@ library.defineWidgetAreas = async function (areas) {
 
 library.loadThemeConfig = async function (uid) {
 	const [themeConfig, userConfig] = await Promise.all([
-		meta.settings.get('harmony'),
+		meta.settings.get('wno-alyx'),
 		user.getSettings(uid),
 	]);
 
-	const config = { ...defaults, ...themeConfig, ...(_.pick(userConfig, Object.keys(defaults))) };
+	const userThemeConfig = {};
+	Object.keys(defaults).forEach((key) => {
+		const setting = `wnoAlyx_${key}`;
+		if (Object.hasOwn(userConfig, setting)) {
+			userThemeConfig[key] = userConfig[setting];
+		}
+	});
+	const config = { ...defaults, ...themeConfig, ...userThemeConfig };
 	config.enableQuickReply = config.enableQuickReply === 'on';
 	config.enableBreadcrumbs = config.enableBreadcrumbs === 'on';
 	config.centerHeaderElements = config.centerHeaderElements === 'on';
@@ -167,7 +173,7 @@ library.getThemeConfig = async function (config) {
 };
 
 library.getAdminSettings = async function (hookData) {
-	if (hookData.plugin === 'harmony') {
+	if (hookData.plugin === 'wno-alyx') {
 		hookData.values = {
 			...defaults,
 			...hookData.values,
@@ -178,8 +184,9 @@ library.getAdminSettings = async function (hookData) {
 
 library.saveUserSettings = async function (hookData) {
 	Object.keys(defaults).forEach((key) => {
-		if (hookData.data.hasOwnProperty(key)) {
-			hookData.settings[key] = hookData.data[key] || undefined;
+		const setting = `wnoAlyx_${key}`;
+		if (Object.hasOwn(hookData.data, setting)) {
+			hookData.settings[setting] = hookData.data[setting] || undefined;
 		}
 	});
 	return hookData;

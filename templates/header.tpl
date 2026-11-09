@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{localeToHTML(userLang, defaultLang)}" {{{if languageDirection}}}data-dir="{languageDirection}" style="direction: {languageDirection};"{{{end}}}>
+<html lang="{localeToHTML(userLang, defaultLang)}" {{{ if (!bootswatchSkin || (bootswatchSkin == "noskin")) }}}data-bs-theme="dark"{{{ end }}} {{{if languageDirection}}}data-dir="{languageDirection}" style="direction: {languageDirection};"{{{end}}}>
 <head>
 	<title>{browserTitle}</title>
 	{{{each metaTags}}}{{buildMetaTag(@value)}}{{{end}}}
@@ -11,6 +11,11 @@
 		var app = {
 			user: JSON.parse('{{userJSON}}')
 		};
+		var wnoAlyxColorMode = document.cookie.match(/(?:^|;\s*)wno-alyx-color-mode=(dark|light)(?:;|$)/);
+		app.wnoAlyxColorMode = wnoAlyxColorMode ? wnoAlyxColorMode[1] : 'dark';
+		{{{ if (!bootswatchSkin || (bootswatchSkin == "noskin")) }}}
+		document.documentElement.setAttribute('data-bs-theme', app.wnoAlyxColorMode);
+		{{{ end }}}
 		document.documentElement.style.setProperty('--panel-offset', `0px`);
 	</script>
 

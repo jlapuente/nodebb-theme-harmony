@@ -1,21 +1,19 @@
 {
-  "name": "nodebb-theme-harmony",
-  "version": "3.3.15",
+  "name": "nodebb-theme-wno-alyx",
+  "version": "1.0.0",
+  "private": true,
   "nbbpm": {
     "compatibility": "^4.16.0"
   },
-  "description": "Harmony theme for NodeBB",
+  "description": "WNO Alyx: an independent HUD-inspired NodeBB theme based on Harmony",
   "main": "library.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NodeBB/nodebb-theme-harmony"
+    "url": "https://github.com/jlapuente/nodebb-theme-harmony"
   },
   "scripts": {
     "lint": "eslint .",
-    "publish:patch": "npm version patch && npm run publish:common",
-    "publish:minor": "npm version minor && npm run publish:common",
-    "publish:major": "npm version major && npm run publish:common",
-    "publish:common": "git push && git push --tags && npm publish"
+    "test": "node --test"
   },
   "keywords": [
     "nodebb",
@@ -38,7 +36,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NodeBB/nodebb-theme-harmony/issues"
+    "url": "https://github.com/jlapuente/nodebb-theme-harmony/issues"
   },
   "dependencies": {
     "@fontsource/inter": "5.2.8",
