@@ -9,7 +9,7 @@ the MIT license. Original contributor metadata is retained in the package.
 
 - Package and theme ID: `nodebb-theme-wno-alyx`
 - Display name: **WNO Alyx**
-- Independent version: **1.0.0**
+- Independent version: **1.0.1**
 - NodeBB compatibility: **^4.16.0**
 
 Harmony is not a runtime dependency. Both packages may be installed, but only
@@ -19,8 +19,9 @@ This fork must be maintained separately when NodeBB or Harmony changes.
 ## Alyx-inspired interface
 
 The default (no Bootswatch skin) appearance uses a technical HUD aesthetic inspired
-by Half-Life: Alyx: graphite panels in dark mode, warm paper surfaces in light
-mode, amber highlights, cyan details, a subtle grid and compact navigation.
+by Half-Life: Alyx: dark tobacco-brown panels in dark mode, parchment surfaces
+in light mode, amber headings and controls, brass details, a subtle grid and
+warm background glow. The interface uses warm colours rather than cyan/green.
 It uses the bundled fonts and CSS only; no game assets or external requests are
 required. Existing translations, category colours and forum controls are retained.
 
@@ -49,11 +50,11 @@ From this repository on Windows:
 npm.cmd pack
 ```
 
-Upload `nodebb-theme-wno-alyx-1.0.0.tgz` to the server. From the **NodeBB root**,
+Upload `nodebb-theme-wno-alyx-1.0.1.tgz` to the server. From the **NodeBB root**,
 install that file using the NodeBB service account:
 
 ```text
-npm install <absolute-path-to-nodebb-theme-wno-alyx-1.0.0.tgz>
+npm install <absolute-path-to-nodebb-theme-wno-alyx-1.0.1.tgz>
 ```
 
 In the admin control panel, open Appearance > Themes and activate **WNO Alyx**,

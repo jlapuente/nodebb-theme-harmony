@@ -12,6 +12,48 @@ const readJSON = file => JSON.parse(read(file));
 const userTemplate = read('templates/account/wno-alyx.tpl');
 const userKeys = [...userTemplate.matchAll(/name="(wnoAlyx_[^"]+)"/g)].map(match => match[1]);
 
+test('warm palettes maintain AA text contrast and consistent Bootstrap RGB tokens', () => {
+	const source = read('scss/alyx.scss');
+	const darkStart = source.indexOf('[data-bs-theme="dark"] &');
+	const palettes = [
+		source.slice(source.indexOf('body.skin-noskin {'), darkStart),
+		source.slice(darkStart, source.indexOf('\n\tcolor: var(--alyx-ink);', darkStart)),
+	];
+	const luminance = (hex) => {
+		const channels = hex.match(/[\da-f]{2}/gi).map(channel => parseInt(channel, 16) / 255)
+			.map(channel => (channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4));
+		return (channels[0] * 0.2126) + (channels[1] * 0.7152) + (channels[2] * 0.0722);
+	};
+	palettes.forEach((palette, index) => {
+		const tokens = Object.fromEntries([...palette.matchAll(/--([\w-]+):\s*([^;]+);/g)].map(match => [match[1], match[2]]));
+		const contrast = (foreground, background) => {
+			const a = luminance(tokens[foreground].replace('#', '').replace(/^fff$/, 'ffffff'));
+			const b = luminance(tokens[background].replace('#', ''));
+			assert((Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05) >= 4.5, `${index}: ${foreground} on ${background}`);
+		};
+		for (const foreground of ['alyx-ink', 'alyx-muted', 'alyx-accent', 'alyx-signal']) {
+			for (const background of ['alyx-surface', 'alyx-surface-raised', 'bs-body-bg']) {
+				contrast(foreground, background);
+			}
+		}
+		contrast('alyx-button-ink', 'alyx-button');
+		for (const [hex, rgb] of [
+			['alyx-ink', 'bs-body-color-rgb'],
+			['alyx-muted', 'bs-secondary-color-rgb'],
+			['alyx-surface', 'bs-tertiary-bg-rgb'],
+			['alyx-surface-raised', 'bs-secondary-bg-rgb'],
+			['alyx-button', 'bs-primary-rgb'],
+			['bs-body-bg', 'bs-body-bg-rgb'],
+		]) {
+			assert.equal(tokens[hex].slice(1).match(/../g).map(channel => parseInt(channel, 16)).join(', '), tokens[rgb]);
+		}
+		for (const token of ['alyx-surface', 'alyx-surface-raised', 'alyx-signal', 'bs-body-bg']) {
+			const [r, g, b] = tokens[token].slice(1).match(/../g).map(channel => parseInt(channel, 16));
+			assert(r > g && g > b, `${token} must remain warm rather than cyan/green`);
+		}
+	});
+});
+
 function loadLibrary({ themeSettings = {}, userSettings = {} } = {}) {
 	const calls = { namespaces: [], routes: [] };
 	const controllers = { renderAdminPage() {}, renderThemeSettings() {} };

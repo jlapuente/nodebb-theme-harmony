@@ -4,29 +4,29 @@ body:not(.skin-noskin) [component="wno-alyx/color-modes"] {
 }
 
 body.skin-noskin {
-	--alyx-surface: #faf9f3;
-	--alyx-surface-raised: #e8ebe3;
-	--alyx-ink: #293534;
-	--alyx-muted: #596662;
-	--alyx-line: #c4ccc1;
-	--alyx-accent: #955017;
-	--alyx-accent-rgb: 149, 80, 23;
+	--alyx-surface: #faf1df;
+	--alyx-surface-raised: #ecdbc0;
+	--alyx-ink: #3b291c;
+	--alyx-muted: #70563e;
+	--alyx-line: #bda07a;
+	--alyx-accent: #87450f;
+	--alyx-accent-rgb: 135, 69, 15;
 	--alyx-button: #a65416;
 	--alyx-button-ink: #fff;
-	--alyx-signal: #226968;
-	--alyx-grid: rgba(41, 53, 52, 0.035);
-	--bs-body-bg: #f1f0e9;
-	--bs-body-bg-rgb: 241, 240, 233;
+	--alyx-signal: #895017;
+	--alyx-grid: rgba(112, 76, 35, 0.055);
+	--bs-body-bg: #f1e3cc;
+	--bs-body-bg-rgb: 241, 227, 204;
 	--bs-body-color: var(--alyx-ink);
-	--bs-body-color-rgb: 41, 53, 52;
-	--bs-emphasis-color: #182322;
-	--bs-emphasis-color-rgb: 24, 35, 34;
+	--bs-body-color-rgb: 59, 41, 28;
+	--bs-emphasis-color: #291a10;
+	--bs-emphasis-color-rgb: 41, 26, 16;
 	--bs-secondary-color: var(--alyx-muted);
-	--bs-secondary-color-rgb: 89, 102, 98;
+	--bs-secondary-color-rgb: 112, 86, 62;
 	--bs-secondary-bg: var(--alyx-surface-raised);
-	--bs-secondary-bg-rgb: 232, 235, 227;
+	--bs-secondary-bg-rgb: 236, 219, 192;
 	--bs-tertiary-bg: var(--alyx-surface);
-	--bs-tertiary-bg-rgb: 250, 249, 243;
+	--bs-tertiary-bg-rgb: 250, 241, 223;
 	--bs-border-color: var(--alyx-line);
 	--bs-border-color-translucent: var(--alyx-line);
 	--bs-primary: var(--alyx-button);
@@ -45,34 +45,36 @@ body.skin-noskin {
 		color-scheme: dark;
 		--nav-color: var(--alyx-ink);
 		--nav-bg: var(--alyx-surface);
-		--alyx-surface: #1b2425;
-		--alyx-surface-raised: #253132;
-		--alyx-ink: #e5e9df;
-		--alyx-muted: #a4b4af;
-		--alyx-line: #415352;
-		--alyx-accent: #f3bd72;
-		--alyx-accent-rgb: 243, 189, 114;
-		--alyx-button: #f3bd72;
-		--alyx-button-ink: #151d1e;
-		--alyx-signal: #8ed3ce;
-		--alyx-grid: rgba(164, 180, 175, 0.035);
-		--bs-body-bg: #131b1c;
-		--bs-body-bg-rgb: 19, 27, 28;
-		--bs-body-color-rgb: 229, 233, 223;
-		--bs-emphasis-color: #f5f5ec;
-		--bs-emphasis-color-rgb: 245, 245, 236;
-		--bs-secondary-color-rgb: 164, 180, 175;
-		--bs-secondary-bg-rgb: 37, 49, 50;
-		--bs-tertiary-bg-rgb: 27, 36, 37;
-		--bs-primary-rgb: 243, 189, 114;
+		--alyx-surface: #2b2118;
+		--alyx-surface-raised: #3a2c1e;
+		--alyx-ink: #f2dfbd;
+		--alyx-muted: #c3a781;
+		--alyx-line: #80603a;
+		--alyx-accent: #ffc568;
+		--alyx-accent-rgb: 255, 197, 104;
+		--alyx-button: #ffc568;
+		--alyx-button-ink: #24180e;
+		--alyx-signal: #dfab58;
+		--alyx-grid: rgba(223, 171, 88, 0.055);
+		--bs-body-bg: #1b1510;
+		--bs-body-bg-rgb: 27, 21, 16;
+		--bs-body-color-rgb: 242, 223, 189;
+		--bs-emphasis-color: #fff0d3;
+		--bs-emphasis-color-rgb: 255, 240, 211;
+		--bs-secondary-color-rgb: 195, 167, 129;
+		--bs-secondary-bg-rgb: 58, 44, 30;
+		--bs-tertiary-bg-rgb: 43, 33, 24;
+		--bs-primary-rgb: 255, 197, 104;
 	}
 
 	color: var(--alyx-ink);
 	background-color: var(--bs-body-bg);
 	background-image:
 		linear-gradient(var(--alyx-grid) 1px, transparent 1px),
-		linear-gradient(90deg, var(--alyx-grid) 1px, transparent 1px);
-	background-size: 48px 48px;
+		linear-gradient(90deg, var(--alyx-grid) 1px, transparent 1px),
+		radial-gradient(ellipse at top, rgba(var(--alyx-accent-rgb), 0.09), transparent 70%);
+	background-size: 48px 48px, 48px 48px, 100% 700px;
+	background-repeat: repeat, repeat, no-repeat;
 
 	::selection {
 		color: var(--alyx-button-ink);
@@ -103,6 +105,7 @@ body.skin-noskin {
 	}
 
 	[component="siteTitle"] h1 {
+		color: var(--alyx-accent) !important;
 		font-family: var(--bs-font-monospace);
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
@@ -151,7 +154,7 @@ body.skin-noskin {
 		padding-inline: 1.25rem;
 		margin-block-end: 0.75rem;
 		border: 1px solid var(--alyx-line);
-		border-inline-start: 3px solid var(--alyx-line);
+		border-inline-start: 3px solid var(--alyx-signal);
 		border-radius: 0.25rem;
 		background: var(--alyx-surface);
 		transition: border-color 150ms ease, background-color 150ms ease;
@@ -170,7 +173,7 @@ body.skin-noskin {
 		}
 
 		.title {
-			color: var(--alyx-ink);
+			color: var(--alyx-accent);
 			line-height: 1.4;
 		}
 
@@ -305,7 +308,7 @@ body.skin-noskin {
 	}
 
 	@media (max-width: 575.98px) {
-		background-size: 32px 32px;
+		background-size: 32px 32px, 32px 32px, 100% 500px;
 
 		.categories-list > [component="categories/category"],
 		.topics-list > [component="category/topic"],
